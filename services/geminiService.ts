@@ -1,14 +1,8 @@
+
 import { GoogleGenAI } from "@google/genai";
 
-const API_KEY = process.env.API_KEY;
-
-if (!API_KEY) {
-  // In a real app, you might want to handle this more gracefully.
-  // For this environment, we assume the key is present.
-  console.warn("Gemini API key not found. Chatbot may not work.");
-}
-
-const ai = new GoogleGenAI({ apiKey: API_KEY! });
+// API_KEY is automatically injected by the environment.
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY! });
 
 const model = 'gemini-2.5-flash';
 const systemInstruction = `You are DHAQAALE AI, a calm, precise, encouraging, and emotionally intelligent assistant for forex traders. 
