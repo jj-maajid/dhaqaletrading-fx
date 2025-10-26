@@ -1,9 +1,6 @@
 
 import { GoogleGenAI } from "@google/genai";
 
-// API_KEY is automatically injected by the environment.
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY! });
-
 const model = 'gemini-2.5-flash';
 const systemInstruction = `You are DHAQAALE AI, a calm, precise, encouraging, and emotionally intelligent assistant for forex traders. 
 Your goal is to guide, explain, and motivate in a relaxing and premium environment. 
@@ -16,6 +13,10 @@ You can use a suitable emoji sometimes to add a friendly touch, like this: Youâ€
 
 export async function* getChatResponseStream(prompt: string): AsyncGenerator<string, void, undefined> {
   try {
+    // API_KEY is automatically injected by the environment.
+    // Initialize the AI client here to prevent app crash on load if env var is not ready.
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY! });
+
     const chat = ai.chats.create({
         model: model,
         config: {
